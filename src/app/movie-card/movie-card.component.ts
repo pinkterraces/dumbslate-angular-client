@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GetAllMoviesService } from '../fetch-api-data.service';
+import { GetAllMoviesService, GetUserService } from '../fetch-api-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -10,8 +13,13 @@ import { GetAllMoviesService } from '../fetch-api-data.service';
 export class MovieCardComponent implements OnInit {
 
   movies: any[] = [];
+  //userDetails: any[] = [];
 
-  constructor(public fetchMovies: GetAllMoviesService) {}
+  constructor(
+    public fetchMovies: GetAllMoviesService,
+    public fetchUserProfile: GetUserService,
+    public dialog: MatDialog
+  ) { }
 
   // This is called once the component has been initiated, similar to component did mount
   ngOnInit(): void {
@@ -26,4 +34,9 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
+/*   openUserProfile(): void {
+    this.dialog.open(UserProfileComponent, {
+      width: '350px'
+    });
+  } */
 }
