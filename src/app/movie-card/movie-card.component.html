@@ -1,5 +1,6 @@
-<div style="display: flex;">
-  <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto; width: 350px; margin: 15px;">
+<app-main-navigation class="app-main-navigation"></app-main-navigation>
+<div style="display: flex; align-content: space-between; overflow: auto;">
+  <mat-card *ngFor="let movie of movies;" style="display: flex; justify-content: space-between; width: 350px; margin: 15px;">
       <mat-card-header>
       <mat-card-title>{{movie.Title}}</mat-card-title>
           <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
@@ -27,4 +28,11 @@
           <mat-icon>favorite_border</mat-icon>
       </mat-card-actions>
   </mat-card>
+<!--   <button 
+  mat-raised-button 
+  color="primary" 
+  (click)="openUserProfile()" 
+  style="margin-right: 10px;">
+    Profile
+  </button> -->
 </div>
