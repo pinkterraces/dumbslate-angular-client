@@ -24,15 +24,17 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public fetchUserProfile: GetUserService,
-    public dialogRef: MatDialogRef<UserProfileComponent>,
+    /* public dialogRef: MatDialogRef<UserProfileComponent>, */
     public snackBar: MatSnackBar,
     private router: Router
   ) { }
 
+  //On component load executes getUserDetails
   ngOnInit(): void {
     this.getUserDetails();
   }
 
+  //Gets user details to display in profile view
   getUserDetails(): void {
     let user = localStorage.getItem("user"); //key value pair
     console.log("user: ", user);
@@ -55,5 +57,16 @@ export class UserProfileComponent implements OnInit {
   placeholderEmail: string = this.userDetails.Email;
   placeholderBirthdate: string = this.userDetails.Birthdate;
   
+
+
+
+
+
+
+
+  // Go back to main page
+  openMovies(): void {
+    this.router.navigate(['movies']);
+  }
   
 }

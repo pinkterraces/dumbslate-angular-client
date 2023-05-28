@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { UserProfileComponent } from '../user-profile/user-profile.component';
@@ -11,19 +12,16 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 export class MainNavigationComponent {
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   openUserProfile(): void {
-    this.dialog.open(UserProfileComponent, {
-      width: '350px'
-    });
+    this.router.navigate(['profile']);
   }
 
   logOut(): void {
-    this.dialog.open(UserProfileComponent, {
-      width: '350px'
-    });
+    
   }
 
 }
