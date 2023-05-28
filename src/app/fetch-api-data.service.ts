@@ -119,7 +119,42 @@ export class DeleteUserService {
 })
 
 export class GetUserService {
+
   constructor(private http: HttpClient) {
+  }
+  public getUser(userDetails: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    console.log("test: ", userDetails);
+    return this.http.get(apiUrl + 'users/' + userDetails, {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    console.log("body: ", body);
+    return body || {};
+  }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` +
+        `Error body is: ${error.error}`);
+    }
+    return throwError(
+      'Something bad happened; please try again later.');
+  }
+
+  //// old
+ /*  constructor(private http: HttpClient) {
   }
   public getUser(userDetails: any): Observable<any> {
     console.log(userDetails);
@@ -137,7 +172,7 @@ export class GetUserService {
     }
     return throwError(
       'Something bad happened; please try again later.');
-  }
+  } */
 }
 
 /// Movie Endpoints
