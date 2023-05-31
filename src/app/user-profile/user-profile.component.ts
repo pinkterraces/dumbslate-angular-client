@@ -38,7 +38,7 @@ export class UserProfileComponent implements OnInit {
   getUserDetails(): void {
     let user = localStorage.getItem("user"); //key value pair
     console.log("user: ", user);
-    this.fetchUserProfile.getUser(user).subscribe((resp: any) => {
+    this.fetchUserProfile.getUser().subscribe((resp: any) => {
       console.log("API Response: ", resp);
       this.userDetails = resp;
       console.log("User Profile Res: ", this.userDetails);
