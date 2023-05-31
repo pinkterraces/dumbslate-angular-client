@@ -8,7 +8,7 @@
           matInput
           [(ngModel)]="userData.Username"
           type="text"
-          [placeholder]="placeholderUsername"
+          placeholder="Username"
           name="Username"
           required
         >
@@ -16,7 +16,6 @@
         <mat-form-field style="display: flex; justify-content: center;">
         <input
           matInput
-          [(ngModel)]="userData.Password"
           type = "password"
           placeholder="********"
           name="Password"
@@ -28,7 +27,7 @@
           matInput
           [(ngModel)]="userData.Email"
           type = "email"
-          [placeholder]="placeholderEmail"
+          placeholder="Email"
           name="Email"
           required
         >
@@ -37,7 +36,7 @@
         <input
           matInput
           [(ngModel)]="userData.Birthdate"
-          [placeholder]="placeholderBirthdate" 
+          placeholder="YYY-MM-DD" 
           name="Birthdate"
         >
       </mat-form-field>
@@ -51,6 +50,7 @@
       <button
         mat-raised-button
         color="primary"
+        (click)="updateUserDetails()" 
       >
         Save
       </button>

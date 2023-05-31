@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 
 // Brings in the API calls we created in 6.2
-import { GetUserService } from '../fetch-api-data.service';
+import { GetUserService, UpdateUserService } from '../fetch-api-data.service';
 
 // Displays notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,6 +24,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public fetchUserProfile: GetUserService,
+    public updateUserProfile: UpdateUserService,
     /* public dialogRef: MatDialogRef<UserProfileComponent>, */
     public snackBar: MatSnackBar,
     private router: Router
@@ -36,33 +37,38 @@ export class UserProfileComponent implements OnInit {
 
   //Gets user details to display in profile view
   getUserDetails(): void {
-    let user = localStorage.getItem("user"); //key value pair
-    console.log("user: ", user);
     this.fetchUserProfile.getUser().subscribe((resp: any) => {
       console.log("API Response: ", resp);
       this.userDetails = resp;
       console.log("User Profile Res: ", this.userDetails);
-      this.placeholderUsername = this.userDetails.Username;
-      this.placeholderPassword = this.userDetails.Password;
-      this.placeholderEmail = this.userDetails.Email;
-      this.placeholderBirthdate = this.userDetails.Birthdate?.substring(0, 10);
-      console.log("Dynamic Value: ", this.placeholderBirthdate);
+      this.userData.Username = this.userDetails.Username;
+      this.userData.Password = this.userDetails.Password;
+      this.userData.Email = this.userDetails.Email;
+      this.userData.Birthdate = this.userDetails.Birthdate?.substring(0, 10);
       return this.userDetails;
     })
   }
 
   //Placeholder text for user profile details overlay
-  placeholderUsername: string = this.userDetails.Username;
-  placeholderPassword: string = this.userDetails.Password;
-  placeholderEmail: string = this.userDetails.Email;
-  placeholderBirthdate: string = this.userDetails.Birthdate;
+ /*  placeholderUsername: string = this.userData.Username;
+  placeholderPassword: string = this.userData.Password;
+  placeholderEmail: string = this.userData.Email;
+  placeholderBirthdate: string = this.userData.Birthdate; */
   
 
 
 
 
 
-
+  updateUserDetails(): void {
+    this.updateUserProfile.updateUser(this.userData).subscribe((resp: any) => {
+      console.log("Update User API Response: ", resp);
+      localStorage.setItem("user", (resp.Username));
+      this.userDetails = resp;
+      /*   console.log("User Profile Res: ", this.userDetails);
+      return this.userDetails; */
+    })
+  }
 
   // Go back to main page
   openMovies(): void {
