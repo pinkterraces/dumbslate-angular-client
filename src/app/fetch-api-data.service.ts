@@ -84,23 +84,23 @@ export class UpdateUserService {
       catchError(this.handleError)
     );
   }
- // Non-typed response extraction
- private extractResponseData(res: Response | Object): any {
-  const body = res;
-  console.log("body: ", body);
-  return body || {};
-}
-private handleError(error: HttpErrorResponse): any {
-  if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
-  } else {
-    console.error(
-      `Error Status code ${error.status}, ` +
-      `Error body is: ${error.error}`);
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    console.log("body: ", body);
+    return body || {};
   }
-  return throwError(
-    'Something bad happened; please try again later.');
-}
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` +
+        `Error body is: ${error.error}`);
+    }
+    return throwError(
+      'Something bad happened; please try again later.');
+  }
 }
 
 @Injectable({
@@ -170,25 +170,25 @@ export class GetUserService {
   }
 
   //// old
- /*  constructor(private http: HttpClient) {
-  }
-  public getUser(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.get(apiUrl + 'users', userDetails).pipe(
-      catchError(this.handleError)
-    );
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
-    }
-    return throwError(
-      'Something bad happened; please try again later.');
-  } */
+  /*  constructor(private http: HttpClient) {
+   }
+   public getUser(userDetails: any): Observable<any> {
+     console.log(userDetails);
+     return this.http.get(apiUrl + 'users', userDetails).pipe(
+       catchError(this.handleError)
+     );
+   }
+   private handleError(error: HttpErrorResponse): any {
+     if (error.error instanceof ErrorEvent) {
+       console.error('Some error occurred:', error.error.message);
+     } else {
+       console.error(
+         `Error Status code ${error.status}, ` +
+         `Error body is: ${error.error}`);
+     }
+     return throwError(
+       'Something bad happened; please try again later.');
+   } */
 }
 
 /// Movie Endpoints
@@ -234,6 +234,38 @@ export class GetAllMoviesService {
 })
 
 export class GetMovieService {
+    constructor(private http: HttpClient) {
+    }
+    public getMovie(title: string): Observable<any> {
+      const token = localStorage.getItem('token');
+      return this.http.get(apiUrl + 'movies/' + title, {
+        headers: new HttpHeaders(
+          {
+            Authorization: 'Bearer ' + token,
+          })
+      }).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+    }
+    // Non-typed response extraction
+    private extractResponseData(res: Response | Object): any {
+      const body = res;
+      return body || {};
+    }
+    private handleError(error: HttpErrorResponse): any {
+      if (error.error instanceof ErrorEvent) {
+        console.error('Some error occurred:', error.error.message);
+      } else {
+        console.error(
+          `Error Status code ${error.status}, ` +
+          `Error body is: ${error.error}`);
+      }
+      return throwError(
+        'Something bad happened; please try again later.');
+    }
+  }
+  /* 
   constructor(private http: HttpClient) {
   }
   public getMovie(title: any): Observable<any> {
@@ -252,8 +284,8 @@ export class GetMovieService {
     }
     return throwError(
       'Something bad happened; please try again later.');
-  }
 }
+  } */
 
 @Injectable({
   providedIn: 'root'
@@ -262,11 +294,22 @@ export class GetMovieService {
 export class GetGenreService {
   constructor(private http: HttpClient) {
   }
-  public getGenre(genre: any): Observable<any> {
-    console.log(genre);
-    return this.http.get(apiUrl + 'movies/genre', genre).pipe(
+  public getGenre(genreName: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'movies/genre/' + genreName, {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -281,6 +324,7 @@ export class GetGenreService {
   }
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -288,11 +332,22 @@ export class GetGenreService {
 export class GetDirectorService {
   constructor(private http: HttpClient) {
   }
-  public getDirector(director: any): Observable<any> {
-    console.log(director);
-    return this.http.get(apiUrl + 'movies/directors', director).pipe(
+  public getDirector(director: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'movies/directors/' + director, {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
