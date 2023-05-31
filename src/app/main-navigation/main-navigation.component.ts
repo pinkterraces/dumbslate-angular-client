@@ -21,7 +21,8 @@ export class MainNavigationComponent {
   }
 
   logOut(): void {
-    
+    this.router.navigate(['welcome']);
+    localStorage.clear();
   }
 
 }
