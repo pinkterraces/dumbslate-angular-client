@@ -25,7 +25,6 @@ export class UserProfileComponent implements OnInit {
   constructor(
     public fetchUserProfile: GetUserService,
     public updateUserProfile: UpdateUserService,
-    /* public dialogRef: MatDialogRef<UserProfileComponent>, */
     public snackBar: MatSnackBar,
     private router: Router
   ) { }
@@ -38,9 +37,7 @@ export class UserProfileComponent implements OnInit {
   //Gets user details to display in profile view
   getUserDetails(): void {
     this.fetchUserProfile.getUser().subscribe((resp: any) => {
-      console.log("API Response: ", resp);
       this.userDetails = resp;
-      console.log("User Profile Res: ", this.userDetails);
       this.userData.Username = this.userDetails.Username;
       this.userData.Password = this.userDetails.Password;
       this.userData.Email = this.userDetails.Email;
@@ -49,24 +46,10 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  //Placeholder text for user profile details overlay
- /*  placeholderUsername: string = this.userData.Username;
-  placeholderPassword: string = this.userData.Password;
-  placeholderEmail: string = this.userData.Email;
-  placeholderBirthdate: string = this.userData.Birthdate; */
-  
-
-
-
-
-
   updateUserDetails(): void {
     this.updateUserProfile.updateUser(this.userData).subscribe((resp: any) => {
-      console.log("Update User API Response: ", resp);
       localStorage.setItem("user", (resp.Username));
       this.userDetails = resp;
-      /*   console.log("User Profile Res: ", this.userDetails);
-      return this.userDetails; */
     })
   }
 
