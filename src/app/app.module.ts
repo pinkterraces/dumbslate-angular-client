@@ -23,6 +23,10 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
+import { GenreInfoComponent } from './genre-info/genre-info.component';
+import { DirectorInfoComponent } from './director-info/director-info.component';
+import { MovieInfoComponent } from './movie-info/movie-info.component';
+import { HandleFavouritesComponent } from './handle-favourites/handle-favourites.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -39,7 +43,11 @@ const appRoutes: Routes = [
     MovieCardComponent,
     WelcomePageComponent,
     UserProfileComponent,
-    MainNavigationComponent
+    MainNavigationComponent,
+    GenreInfoComponent,
+    DirectorInfoComponent,
+    MovieInfoComponent,
+    HandleFavouritesComponent
   ],
   imports: [
     BrowserModule,
