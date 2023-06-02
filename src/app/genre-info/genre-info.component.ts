@@ -24,6 +24,7 @@ export class GenreInfoComponent implements OnInit {
   ngOnInit(): void {
     this.fetchGenreDetails.getGenre(this.data.Name).subscribe((resp: any) => {
       console.log("Genre API Response: ", resp);
+      console.log("this.data.Name: ", this.data.Name);
       this.genreDetails = resp;
       console.log("User Profile Res: ", this.genreDetails);
       return this.genreDetails;
