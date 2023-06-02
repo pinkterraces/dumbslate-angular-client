@@ -28,7 +28,16 @@
           >
               Synopsis
           </button>
-          <mat-icon>favorite_border</mat-icon>
+         
+          <button
+              mat-button
+              color="primary"
+              (click)="addFavourite(movie._id)"
+          >
+            <mat-icon>
+              {{ icon }}
+            </mat-icon>
+          </button>
       </mat-card-actions>
   </mat-card>
 <!--   <button 

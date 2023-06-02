@@ -6,6 +6,7 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { GenreInfoComponent } from '../genre-info/genre-info.component';
 import { DirectorInfoComponent } from '../director-info/director-info.component';
 import { MovieInfoComponent } from '../movie-info/movie-info.component';
+import { HandleFavouritesComponent } from '../handle-favourites/handle-favourites.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -16,8 +17,12 @@ import { MovieInfoComponent } from '../movie-info/movie-info.component';
 export class MovieCardComponent implements OnInit {
 
   movies: any[] = [];
-  //userDetails: any[] = [];
-  message: string = 'Hello from Parent!';
+  userDetails: any[] = [];
+  //message: string = 'Hello from Parent!';
+  favourites: any[] = [];
+  icon: string = "favorite_border";
+  /* iconBorder: string = "favorite_border";
+  iconFilled: string = "favorite"; */
 
   constructor(
     public fetchMovies: GetAllMoviesService,
@@ -28,6 +33,7 @@ export class MovieCardComponent implements OnInit {
   // This is called once the component has been initiated, similar to component did mount
   ngOnInit(): void {
     this.getMovies();
+    /* this.getFavourites(); */
   }
 
   getMovies(): void {
@@ -37,6 +43,14 @@ export class MovieCardComponent implements OnInit {
       return this.movies;
     })
   }
+
+/*   getFavourites(): void {
+    this.fetchUserProfile.getUser().subscribe((resp: any) => {
+      console.log("User FavoriteMovies: ", resp.FavoriteMovies);
+      this.favourites = resp.FavoriteMovies;
+      return this.favourites;
+    })
+  } */
 
   openGenreInfoDialog(name: string, description: string): void {
     this.dialog.open(GenreInfoComponent, {
@@ -59,6 +73,16 @@ export class MovieCardComponent implements OnInit {
     this.dialog.open(MovieInfoComponent, {
       data: {
         Title: title
+      },
+      width: '400px',
+    });
+  }
+
+  addFavourite(id: string): void {
+    console.log("Favourites-movies", this.movies);
+    this.dialog.open(HandleFavouritesComponent, {
+      data: {
+        Id: id
       },
       width: '400px',
     });
