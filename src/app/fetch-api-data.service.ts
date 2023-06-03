@@ -265,27 +265,6 @@ export class GetMovieService {
       'Something bad happened; please try again later.');
   }
 }
-/* 
-constructor(private http: HttpClient) {
-}
-public getMovie(title: any): Observable<any> {
-  console.log(title);
-  return this.http.get(apiUrl + 'movies', title).pipe(
-    catchError(this.handleError)
-  );
-}
-private handleError(error: HttpErrorResponse): any {
-  if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
-  } else {
-    console.error(
-      `Error Status code ${error.status}, ` +
-      `Error body is: ${error.error}`);
-  }
-  return throwError(
-    'Something bad happened; please try again later.');
-}
-} */
 
 @Injectable({
   providedIn: 'root'
@@ -404,7 +383,7 @@ export class AddFavouriteService {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
-        })
+        }), responseType: 'text'
     }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
@@ -412,6 +391,7 @@ export class AddFavouriteService {
   }
   // Non-typed response extraction
   private extractResponseData(res: Response | Object): any {
+    console.log(res);
     const body = res;
     return body || {};
   }
@@ -431,49 +411,46 @@ export class AddFavouriteService {
       'Something bad happened; please try again later.');
   }
 }
-/*  constructor(private http: HttpClient) {
- }
- public addFavourite(movie: any, userName: any): Observable<any> {
-   console.log(userName, movie);
-   return this.http.post(apiUrl + 'users/' + userName + '/movies', movie).pipe(
-     catchError(this.handleError)
-   );
- }
- private handleError(error: HttpErrorResponse): any {
-   if (error.error instanceof ErrorEvent) {
-     console.error('Some error occurred:', error.error.message);
-   } else {
-     console.error(
-       `Error Status code ${error.status}, ` +
-       `Error body is: ${error.error}`);
-   }
-   return throwError(
-     'Something bad happened; please try again later.');
-}
- } */
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class DeleteFavouriteService {
-  constructor(private http: HttpClient) {
-  }
-  public deleteFavourite(movie: any, userName: any): Observable<any> {
-    console.log(userName, movie);
-    return this.http.delete(apiUrl + 'users/' + userName + '/movies', movie).pipe(
-      catchError(this.handleError)
-    );
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
+export class RemoveFavouriteService {
+    constructor(private http: HttpClient) {
     }
-    return throwError(
-      'Something bad happened; please try again later.');
-  }
+    public removeFavourite(movieId: any): Observable<any> {
+      const user = localStorage.getItem('user');
+      const token = localStorage.getItem('token');
+      ///users/:Username/movies/:MovieID
+      return this.http.delete(apiUrl + 'users/' + user + '/movies/' + movieId, {
+        headers: new HttpHeaders(
+          {
+            Authorization: 'Bearer ' + token,
+          })
+      }).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+    }
+    // Non-typed response extraction
+    private extractResponseData(res: Response | Object): any {
+      const body = res;
+      return body || {};
+    }
+    private handleError(error: HttpErrorResponse): any {
+      if (error.error instanceof ErrorEvent) {
+        console.error('Some error occurred:', error.error.message);
+        //Thanks ChatGPT for the next 2 lines
+      } else if (error.status === 200 && error.error && error.error.text) {
+        // Successful response with additional information
+        console.log('Success:', error.error.text);
+      } else {
+        console.error(
+          `Error Status code ${error.status}, ` +
+          `Error body is: ${JSON.stringify(error.error)}`);
+      }
+      return throwError(
+        'Something bad happened; please try again later.');
+    }
 }
