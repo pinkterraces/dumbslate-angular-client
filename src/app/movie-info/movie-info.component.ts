@@ -19,8 +19,6 @@ export class MovieInfoComponent implements OnInit {
     public fetchMovieDetails: GetMovieService,
   ) {}
 
-  /* Genre: string = ''; */
-
   ngOnInit(): void {
     this.fetchMovieDetails.getMovie(this.data.Title).subscribe((resp: any) => {
       console.log("Genre API Response: ", resp);
