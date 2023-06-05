@@ -3,9 +3,6 @@ import { GetAllMoviesService, GetUserService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
-import { GenreInfoComponent } from '../genre-info/genre-info.component';
-import { DirectorInfoComponent } from '../director-info/director-info.component';
-import { MovieInfoComponent } from '../movie-info/movie-info.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -17,7 +14,6 @@ export class MovieCardComponent implements OnInit {
 
   movies: any[] = [];
   //userDetails: any[] = [];
-  message: string = 'Hello from Parent!';
 
   constructor(
     public fetchMovies: GetAllMoviesService,
@@ -38,30 +34,9 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
-  openGenreInfoDialog(name: string, description: string): void {
-    this.dialog.open(GenreInfoComponent, {
-      data: {
-        Name: name
-      },
-      width: '400px',
+/*   openUserProfile(): void {
+    this.dialog.open(UserProfileComponent, {
+      width: '350px'
     });
-  }
-
-  openDirectorInfoDialog(name: string, description: string): void {
-    this.dialog.open(DirectorInfoComponent, {
-      data: {
-        Name: name
-      },
-      width: '400px',
-    });
-  }
-  openMovieInfoDialog(title: string, description: string): void {
-    this.dialog.open(MovieInfoComponent, {
-      data: {
-        Title: title
-      },
-      width: '400px',
-    });
-  }
-
+  } */
 }
