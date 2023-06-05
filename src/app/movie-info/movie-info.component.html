@@ -1,0 +1,25 @@
+ <mat-card>
+  <mat-card-header style="display: flex; justify-content: center;">
+    <mat-card-title>
+      <h1>{{ movieDetails.Title }}</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content style="display: flex; justify-content: center; margin-bottom: 25px;">
+    <p>{{ movieDetails.Description }}</p>
+  </mat-card-content>
+  <mat-card-content style="display: flex; justify-content: start;">
+    <p>Directed by {{ movieDetails.Director.Name }}</p>
+  </mat-card-content>
+  <mat-card-content style="display: flex; justify-content: start; margin-bottom: 25px;">
+    <p>Genre: {{ movieDetails.Genre.Name }}</p>
+  </mat-card-content>
+  <mat-card-actions style="display: flex; justify-content: center;"> 
+      <button
+        mat-raised-button
+        mat-dialog-close
+        color="primary"
+      >
+        Close
+      </button>
+  </mat-card-actions>
+</mat-card>
