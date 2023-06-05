@@ -46,7 +46,8 @@ const appRoutes: Routes = [
     MainNavigationComponent,
     GenreInfoComponent,
     DirectorInfoComponent,
-    MovieInfoComponent
+    MovieInfoComponent,
+    HandleFavouritesComponent
   ],
   imports: [
     BrowserModule,
