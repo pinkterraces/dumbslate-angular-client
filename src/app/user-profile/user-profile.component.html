@@ -1,59 +1,83 @@
-<div style="display: flex; justify-content: center;">
-  <div style="width: 400px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; flex-direction: column;">
-    <h1>Profile</h1>
-    <form>
-      <mat-form-field style="display: flex; justify-content: center; ">
-        
-        <input
-          matInput
-          [(ngModel)]="userData.Username"
-          type="text"
-          placeholder="Username"
-          name="Username"
-          required
-        >
+<div style="display: flex; justify-content: center; flex-direction: column;">
+  <div id="1" style="display: flex; justify-content: center;">
+    <div style="width: 400px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; flex-direction: column;">
+      <h1>Profile</h1>
+      <form>
+        <mat-form-field style="display: flex; justify-content: center; ">
+          
+          <input
+            matInput
+            [(ngModel)]="userData.Username"
+            type="text"
+            placeholder="Username"
+            name="Username"
+            required
+          >
+          </mat-form-field>
+          <mat-form-field style="display: flex; justify-content: center;">
+          <input
+            matInput
+            type = "password"
+            placeholder="********"
+            name="Password"
+            required
+          >
+        </mat-form-field>
+        <mat-form-field style="display: flex; justify-content: center; width: 300px;">
+          <input
+            matInput
+            [(ngModel)]="userData.Email"
+            type = "email"
+            placeholder="Email"
+            name="Email"
+            required
+          >
         </mat-form-field>
         <mat-form-field style="display: flex; justify-content: center;">
-        <input
-          matInput
-          type = "password"
-          placeholder="********"
-          name="Password"
-          required
-        >
-      </mat-form-field>
-      <mat-form-field style="display: flex; justify-content: center; width: 300px;">
-        <input
-          matInput
-          [(ngModel)]="userData.Email"
-          type = "email"
-          placeholder="Email"
-          name="Email"
-          required
-        >
-      </mat-form-field>
-      <mat-form-field style="display: flex; justify-content: center;">
-        <input
-          matInput
-          [(ngModel)]="userData.Birthdate"
-          placeholder="YYY-MM-DD" 
-          name="Birthdate"
-        >
-      </mat-form-field>
-      <button
-      mat-raised-button
-      color="primary"
-      (click)="openMovies()" 
-      >
-        Cancel
-      </button>
-      <button
+          <input
+            matInput
+            [(ngModel)]="userData.Birthdate"
+            placeholder="YYY-MM-DD" 
+            name="Birthdate"
+          >
+        </mat-form-field>
+        <button
         mat-raised-button
         color="primary"
-        (click)="updateUserDetails()" 
-      >
-        Save
-      </button>
-    </form>
+        (click)="openMovies()" 
+        >
+          Cancel
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="updateUserDetails()" 
+        >
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+  <div style="display: flex; align-items: flex-start; margin-bottom: 25px; flex-direction: column;">
+    <div style="width: 100%; text-align: center;">
+      <h2>Favourite Movies</h2>
+    </div>     
+      <div id="2" style="display: flex; overflow: auto;">
+        <mat-card *ngFor="let favourite of favoriteMovies;"
+            style="display: flex; justify-content: space-between; min-width: 220px; margin: 15px;">
+            <mat-card-header>
+                <mat-card-title>{{favourite.Title}}</mat-card-title>
+                <mat-card-subtitle>Directed by: {{favourite.Director.Name}}</mat-card-subtitle>
+            </mat-card-header>
+            <img src={{favourite.ImagePath}} width="100%" alt={{favourite.Title}} />
+            <mat-card-actions>
+                <button
+                    mat-button color="primary"
+                    (click)="removeFavourite(favourite._id)">
+                    Remove
+                </button>
+            </mat-card-actions>
+        </mat-card>
+      </div>
   </div>
 </div>
