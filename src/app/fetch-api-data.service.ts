@@ -6,10 +6,10 @@ import { map } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://dumbslate.herokuapp.com/';
-
 @Injectable({
   providedIn: 'root'
 })
+
 // User Endpoints
 export class UserRegistrationService {
   // Inject the HttpClient module to the constructor params
@@ -36,10 +36,6 @@ export class UserRegistrationService {
   }
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-
 export class UserLoginService {
   constructor(private http: HttpClient) {
   }
@@ -61,10 +57,6 @@ export class UserLoginService {
       'Something bad happened; please try again later.');
   }
 }
-
-@Injectable({
-  providedIn: 'root'
-})
 
 export class UpdateUserService {
   constructor(private http: HttpClient) {
@@ -88,10 +80,6 @@ export class UpdateUserService {
   }
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-
 export class DeleteUserService {
   constructor(private http: HttpClient) {
   }
@@ -113,10 +101,6 @@ export class DeleteUserService {
       'Something bad happened; please try again later.');
   }
 }
-
-@Injectable({
-  providedIn: 'root'
-})
 
 export class GetUserService {
   constructor(private http: HttpClient) {
@@ -141,10 +125,6 @@ export class GetUserService {
 }
 
 /// Movie Endpoints
-@Injectable({
-  providedIn: 'root'
-})
-
 export class GetAllMoviesService {
   constructor(private http: HttpClient) {
   }
@@ -178,10 +158,6 @@ export class GetAllMoviesService {
   }
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-
 export class GetMovieService {
   constructor(private http: HttpClient) {
   }
@@ -204,10 +180,6 @@ export class GetMovieService {
   }
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-
 export class GetGenreService {
   constructor(private http: HttpClient) {
   }
@@ -229,10 +201,6 @@ export class GetGenreService {
       'Something bad happened; please try again later.');
   }
 }
-
-@Injectable({
-  providedIn: 'root'
-})
 
 export class GetDirectorService {
   constructor(private http: HttpClient) {
@@ -257,10 +225,6 @@ export class GetDirectorService {
 }
 
 /// UserMovie Endpoints
-@Injectable({
-  providedIn: 'root'
-})
-
 export class GetUserFavouritesService {
   constructor(private http: HttpClient) {
   }
@@ -283,10 +247,6 @@ export class GetUserFavouritesService {
   }
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-
 export class AddFavouriteService {
   constructor(private http: HttpClient) {
   }
@@ -308,10 +268,6 @@ export class AddFavouriteService {
       'Something bad happened; please try again later.');
   }
 }
-
-@Injectable({
-  providedIn: 'root'
-})
 
 export class DeleteFavouriteService {
   constructor(private http: HttpClient) {
