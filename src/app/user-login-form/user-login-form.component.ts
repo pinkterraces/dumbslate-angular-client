@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
 
 // Closes the dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
@@ -24,8 +24,7 @@ export class UserLoginFormComponent implements OnInit {
     public fetchApiData: UserLoginService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,
-    private router: Router
-    ) { }
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -33,19 +32,17 @@ export class UserLoginFormComponent implements OnInit {
   // This is the function responsible for sending the form inputs to the backend
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
-      console.log("userData: ", this.userData)
       this.dialogRef.close(); // This will close the modal on success!
-      localStorage.setItem("user", (result.user.Username)); //key value pair
+      localStorage.setItem("user", JSON.stringify(result.user)); //key value pair
       localStorage.setItem("token", result.token);
       console.log(result)
       console.log("User: ", result.user)
       console.log("Token: ", result.token)
-      this.snackBar.open('User Login Successful', 'OK', {
+      this.snackBar.open(result, 'OK', {
         duration: 2000
       });
-      this.router.navigate(['movies']);
     }, (result) => {
-      this.snackBar.open('User Login Failed', 'OK', {
+      this.snackBar.open(result, 'OK', {
         duration: 2000
       });
     });
