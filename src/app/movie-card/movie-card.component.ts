@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenreInfoComponent } from '../genre-info/genre-info.component';
 import { DirectorInfoComponent } from '../director-info/director-info.component';
 import { MovieInfoComponent } from '../movie-info/movie-info.component';
-import { HandleFavouritesComponent } from '../handle-favourites/handle-favourites.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -19,8 +18,6 @@ export class MovieCardComponent implements OnInit {
   userDetails: any[] = [];
   favourites: any[] = [];
   icon: string = "favorite_border";
-  /* iconBorder: string = "favorite_border";
-  iconFilled: string = "favorite"; */
 
   constructor(
     public fetchMovies: GetAllMoviesService,
@@ -31,31 +28,45 @@ export class MovieCardComponent implements OnInit {
     public snackBar: MatSnackBar
   ) { }
 
-  // This is called once the component has been initiated, similar to component did mount
   ngOnInit(): void {
     this.getMovies();
     this.getFavourites();
   }
 
+/**
+  * Calls the get movies method on the API
+*/
   getMovies(): void {
     this.fetchMovies.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
       return this.movies;
     })
   }
 
+/**
+  * Calls the get user method on the API
+  * @returns the favourite movies list in DB
+*/
   getFavourites(): void {
     this.fetchUserProfile.getUser().subscribe((resp: any) => {
       this.favourites = resp.FavoriteMovies;
-      console.log(this.favourites);
       return this.favourites;
     });
   }
+
+/**
+  * Checks if a movie is in user favourites or not
+  * @returns the favourite movies list in DB
+*/
   isFavorite(id: string): boolean {
     return this.favourites.includes(id);
   }
 
+/**
+  * Opens genre modal
+  * @params name genre name
+  * @params description genre description
+*/
   openGenreInfoDialog(name: string, description: string): void {
     this.dialog.open(GenreInfoComponent, {
       data: {
@@ -65,6 +76,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+/**
+  * Opens director modal
+  * @params name director name
+  * @params description director bio
+*/
   openDirectorInfoDialog(name: string, description: string): void {
     this.dialog.open(DirectorInfoComponent, {
       data: {
@@ -73,6 +89,12 @@ export class MovieCardComponent implements OnInit {
       width: '400px',
     });
   }
+
+/**
+  * Opens movie modal
+  * @params name movie title
+  * @params description movie description
+*/
   openMovieInfoDialog(title: string, description: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
@@ -82,10 +104,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+/**
+  * Adds favourite movie to user profile
+  * @params id is movie ID
+*/
   addFavourite(id: string): void {
     this.fetchAddFavourite.addFavourite(id).subscribe((resp: any) => {
-      console.log("Genre API Response: ", resp);
-      console.log("id: ", id);
       this.snackBar.open('Movie added to favorites', 'OK', {
         duration: 4000,
       });
@@ -93,10 +117,12 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
+/**
+  * Removes favourite movie to user profile
+  * @params id is movie ID
+*/  
   removeFavourite(id: string): void {
     this.fetchRemoveFavourite.removeFavourite(id).subscribe((resp: any) => {
-      console.log("Genre API Response: ", resp);
-      console.log("id: ", id);
       this.snackBar.open('Movie removed from favorites', 'OK', {
         duration: 4000,
       });
