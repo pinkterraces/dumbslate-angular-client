@@ -1,27 +1,54 @@
-# DumbslateAngularClient
+# Dumbslate (Angular)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
+## Summary
 
-## Development server
+This app allows users to browse obsure movies from the 1980s to find a short description and information about the genre and director, as well as create / edit a profile, and save a list of their favourite films to their profile. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Angular CLI version 16.0.1 and Angular Material Design is used for the front-end development.
 
-## Code scaffolding
+The REST API was developed using Express framework for Node.js, which interfaces with a MongoDB database, leveraging Mongoose models to query the data. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Tech Stack
 
-## Build
+- Angular
+- TypeScript
+- Angular Material Design
+- Node.js
+- Express
+- Mongoose
+- MongoDB
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Getting started
 
-## Running unit tests
+- Close repository
+`https://github.com/pinkterraces/dumbslate-angular-client.git`
+- Install npm package manager
+- Install dependencies
+`npm install`
+- Run `ng serve --open` for a dev server
+- If browser doesn't open, navigate to `http://localhost:4200/`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+API code can be found here: https://github.com/pinkterraces/film-app
 
-## Running end-to-end tests
+### Live version
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+https://pinkterraces.github.io/dumbslate-angular-client/
 
-## Further help
+### Features
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Create / unregister profile
+- Login
+- Update and edit profile data
+- Get and display all movies
+- Get and display data for a single movie
+- Add / remove movie to list of favourite movies
+- Display list of movie on profile
+
+### Dependencies
+
+- Angular CLI 16.0.1
+- Angular Material Design
+- Node.js
+- Express
+- Mongoose
+- MongoDB
