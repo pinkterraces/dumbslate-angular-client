@@ -7,6 +7,10 @@ import { GetGenreService } from '../fetch-api-data.service';
   templateUrl: './genre-info.component.html',
   styleUrls: ['./genre-info.component.scss']
 })
+
+/**
+  * Displays movie genre information in overlay
+  */ 
 export class GenreInfoComponent implements OnInit {
 
   genreDetails: any = {};
@@ -19,14 +23,14 @@ export class GenreInfoComponent implements OnInit {
     public fetchGenreDetails: GetGenreService,
   ) {}
 
-  /* Genre: string = ''; */
-
+/**
+  * Get movie genre information
+  * Calls the getGenre method on the API
+  * @params Name is genre name
+  */ 
   ngOnInit(): void {
     this.fetchGenreDetails.getGenre(this.data.Name).subscribe((resp: any) => {
-      console.log("Genre API Response: ", resp);
-      console.log("this.data.Name: ", this.data.Name);
       this.genreDetails = resp;
-      console.log("User Profile Res: ", this.genreDetails);
       return this.genreDetails;
     })
   }

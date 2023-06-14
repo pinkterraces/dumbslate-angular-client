@@ -106,6 +106,7 @@ export class MovieCardComponent implements OnInit {
 
 /**
   * Adds favourite movie to user profile
+  * Calls the addFavourite method on the API
   * @params id is movie ID
 */
   addFavourite(id: string): void {
@@ -119,6 +120,7 @@ export class MovieCardComponent implements OnInit {
 
 /**
   * Removes favourite movie to user profile
+  * Calls the removeFavourite method on the API
   * @params id is movie ID
 */  
   removeFavourite(id: string): void {

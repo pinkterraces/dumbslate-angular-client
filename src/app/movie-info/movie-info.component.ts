@@ -7,6 +7,10 @@ import { GetMovieService } from '../fetch-api-data.service';
   templateUrl: './movie-info.component.html',
   styleUrls: ['./movie-info.component.scss']
 })
+
+/** 
+ * Gets the information of a single movie
+ */  
 export class MovieInfoComponent implements OnInit {
 
   movieDetails: any = {};
@@ -19,11 +23,15 @@ export class MovieInfoComponent implements OnInit {
     public fetchMovieDetails: GetMovieService,
   ) {}
 
+/**
+  * Gets individual Movie
+  * Calls the getMovie method on the API
+  * @param Title the the movie title
+  * @returns the movie object
+  */  
   ngOnInit(): void {
     this.fetchMovieDetails.getMovie(this.data.Title).subscribe((resp: any) => {
-      console.log("Genre API Response: ", resp);
       this.movieDetails = resp;
-      console.log("User Profile Res: ", this.movieDetails);
       return this.movieDetails;
     })
   }

@@ -7,6 +7,10 @@ import { GetDirectorService } from '../fetch-api-data.service';
   templateUrl: './director-info.component.html',
   styleUrls: ['./director-info.component.scss']
 })
+
+/**
+  * Creates director info overlay
+  */ 
 export class DirectorInfoComponent {
 
   directorDetails: any = {};
@@ -19,13 +23,14 @@ export class DirectorInfoComponent {
     public fetchDirectorDetails: GetDirectorService,
   ) {}
 
-  /* Genre: string = ''; */
-
+/**
+  * Gets director information
+  * Calls the getDirector method on the API
+  * @params Name is director name
+  */ 
   ngOnInit(): void {
     this.fetchDirectorDetails.getDirector(this.data.Name).subscribe((resp: any) => {
-      console.log("Director API Response: ", resp);
       this.directorDetails = resp;
-      console.log("Director Res: ", this.directorDetails);
       return this.directorDetails;
     })
   }

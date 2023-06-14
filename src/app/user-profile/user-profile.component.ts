@@ -19,6 +19,10 @@ import { MovieInfoComponent } from '../movie-info/movie-info.component'; */
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
+
+/** 
+ * Loads the user profile information and allows the user to update their profile information
+ */  
 export class UserProfileComponent implements OnInit {
 
   userDetails: any = {};
@@ -41,12 +45,18 @@ export class UserProfileComponent implements OnInit {
     private router: Router
   ) { }
 
-  //On component load executes getUserDetails
+  /**
+  * Executes when components loads
+  */
   ngOnInit(): void {
     this.getUserDetails();
   }
 
-  //Gets user details to display in profile view
+  /**
+  * Gets user profile information
+  * Calls the getUser method on the API
+  * @returns the user details
+  */
   getUserDetails(): void {
     this.fetchUserProfile.getUser().subscribe((resp: any) => {
       this.userDetails = resp;
@@ -55,6 +65,12 @@ export class UserProfileComponent implements OnInit {
       this.userData.Email = this.userDetails.Email;
       this.userData.Birthdate = this.userDetails.Birthdate?.substring(0, 10);
       //return this.userDetails;
+      /**
+        * Checks for user faourties
+        * @param userDetails the user profile information
+        * @param _id the movies ID
+        * @returns list of user favourie movies
+        */
       this.fetchMovies.getAllMovies().subscribe((resp: any) => {
         this.favoriteMovies = resp.filter((m: { _id: any; }) => this.userDetails.FavoriteMovies.indexOf(m._id) >= 0);
         console.log("is it:", this.favoriteMovies);
@@ -62,6 +78,12 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  /**
+    * Updates user profile information and sets "user" in local storafe
+    * Calls the updateUser method on the API
+    * @param userData the new user profile information
+    * @returns the updated user profile information
+    */
   updateUserDetails(): void {
     this.updateUserProfile.updateUser(this.userData).subscribe((resp: any) => {
       localStorage.setItem("user", (resp.Username));
@@ -69,64 +91,21 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  // Cancel  //Go back to main page
+  /**
+    * Returns user back to the main page
+    */
   openMovies(): void {
     this.router.navigate(['movies']);
   }
 
-  //Favourites
- /*  getFavourites(): void {
-    this.fetchUserProfile.getUser().subscribe((resp: any) => {
-      this.favourites = resp.FavoriteMovies;
-      console.log(this.favourites);
-      return this.favourites;
-    });
-  }
-  isFavorite(id: string): boolean {
-    return this.favourites.includes(id);
-  }
-
-  openGenreInfoDialog(name: string, description: string): void {
-    this.dialog.open(GenreInfoComponent, {
-      data: {
-        Name: name
-      },
-      width: '400px',
-    });
-  }
-
-  openDirectorInfoDialog(name: string, description: string): void {
-    this.dialog.open(DirectorInfoComponent, {
-      data: {
-        Name: name
-      },
-      width: '400px',
-    });
-  }
-  openMovieInfoDialog(title: string, description: string): void {
-    this.dialog.open(MovieInfoComponent, {
-      data: {
-        Title: title
-      },
-      width: '400px',
-    });
-  }
-
-  addFavourite(id: string): void {
-    this.fetchAddFavourite.addFavourite(id).subscribe((resp: any) => {
-      console.log("Genre API Response: ", resp);
-      console.log("id: ", id);
-      this.snackBar.open('Movie added to favorites', 'OK', {
-        duration: 4000,
-      });
-      this.ngOnInit();
-    })
-  } */
-
+  /**
+    * Removes favourite from user profile
+    * Calls the removeFavourite method on the API
+    * @param id the movie ID
+    * @returns success message
+    */
   removeFavourite(id: string): void {
     this.fetchRemoveFavourite.removeFavourite(id).subscribe((resp: any) => {
-      console.log("Genre API Response: ", resp);
-      console.log("id: ", id);
       this.snackBar.open('Movie removed from favorites', 'OK', {
         duration: 4000,
       });
