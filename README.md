@@ -8,6 +8,9 @@ Angular CLI version 16.0.1 and Angular Material Design is used for the front-end
 
 The REST API was developed using Express framework for Node.js, which interfaces with a MongoDB database, leveraging Mongoose models to query the data. 
 
+In case of issues with sign-up an existing account can be accessed with these details:
+DumbslateTest2 / password
+
 ### Tech Stack
 
 - Angular
